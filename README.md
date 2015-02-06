@@ -1,8 +1,8 @@
 tinymce-quick-upload
 ===================
-This is a quick upload plugin for tinymce.
+A quick-upload plugin of tinymce.
 
-use it
+How to use
 --------
 1. download quickupload folder, and save it in tinymce plugins path.
 
@@ -13,7 +13,7 @@ use it
 	<script src="../plupload-path/plupload.full.min.js"></script>
 	```
 
-3. add plugin "quickupload", and button "quickupload".
+3. add plugin "quickupload", and add button "quickupload".
 
 	```js
 	tinymce.init({
@@ -29,11 +29,13 @@ use it
 	```js
 	tinymce.init({
 		.....
-		upload_basepath: '/_develop/plupload/js/',
-		upload_url: './moxiemanager/api.php',
-		upload_callback: function(res) {
+		plupload_basepath	: "../plupload-path/",
+		upload_url			: "../upload.php",
+		upload_post_params	: {action:"upload"},
+		upload_file_size	: '1mb',
+		upload_callback		: function(res) {
 			if (res.status == 200)
-				return res.response;  // a image path.
+				return res.response;  //image path
 			else
 				return false;
 		}
