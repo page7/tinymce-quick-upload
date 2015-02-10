@@ -33,11 +33,14 @@ How to use
 		upload_url			: "../upload.php",
 		upload_post_params	: {action:"upload"},
 		upload_file_size	: '1mb',
-		upload_callback		: function(res) {
+		upload_callback		: function(res, file, up) {
 			if (res.status == 200)
 				return res.response;  //image path
 			else
 				return false;
+		}
+		upload_error		: function(err, up) {
+			// error.status  error.message
 		}
 	});
 	```
