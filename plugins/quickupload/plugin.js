@@ -14,7 +14,7 @@ tinymce.PluginManager.add('quickupload', function(editor) {
 	var callback = editor.settings.upload_callback;
 
 	// callback of error
-	var error = editor.settings.upload_error;
+	var error_call = editor.settings.upload_error;
 
 	// post params
 	var postdata = editor.settings.upload_post_params;
@@ -75,7 +75,7 @@ tinymce.PluginManager.add('quickupload', function(editor) {
 				UploadComplete: function(up, files) {},
 
 				Error: function(up, err) {
-					upload_error(err, up);
+					error_call(err, up);
 				}
 			}
 		});
