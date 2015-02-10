@@ -13,6 +13,9 @@ tinymce.PluginManager.add('quickupload', function(editor) {
 	// one arg is plupload xhr response, return false or a image path.
 	var callback = editor.settings.upload_callback;
 
+	// callback of error
+	var error = editor.settings.upload_error;
+
 	// post params
 	var postdata = editor.settings.upload_post_params;
 
@@ -63,7 +66,7 @@ tinymce.PluginManager.add('quickupload', function(editor) {
 				FileUploaded: function(up, file, res) {
 					ico.className = 'mce-ico mce-i-image';
 					tooltip.settings.tooltip = "Insert/edit image";
-					var file = callback(res);
+					var file = callback(res, file, up);
 					if (!file) return;
 					editor.focus();
 					editor.selection.setContent(editor.dom.createHTML('img', {src:file}));
@@ -71,7 +74,9 @@ tinymce.PluginManager.add('quickupload', function(editor) {
 
 				UploadComplete: function(up, files) {},
 
-				Error: function(up, err) {}
+				Error: function(up, err) {
+					upload_error(err, up);
+				}
 			}
 		});
 
